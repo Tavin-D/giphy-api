@@ -3,6 +3,7 @@ console.log("script.js loaded");
 const apiKey = "A3yldSECPQKSIaRwapQZUQNcUgFWob4r";
 const gifContainer = document.querySelector("#gif-container");
 const searchInput = document.querySelector("#search-input");
+const fetchButton = document.querySelector("#fetch-gif-btn");
 
 async function getGifs(searchTerm = "football") {
     try {
@@ -49,13 +50,19 @@ function displayGifs(images) {
     });
 }
 
+function searchGifs() {
+    const searchTerm = searchInput.value.trim();
+
+    if (searchTerm) {
+        getGifs(searchTerm);
+    }
+}
+
+fetchButton.addEventListener("click", searchGifs);
+
 searchInput.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
-        const searchTerm = searchInput.value.trim();
-
-        if (searchTerm) {
-            getGifs(searchTerm);
-        }
+        searchGifs();
     }
 });
 
